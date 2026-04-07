@@ -26,7 +26,6 @@ class TallerController
         require __DIR__ . '/../views/taller/listado.php';
     }
 
-    // Retorna talleres disponibles en JSON (cupo > 0)
     public function getTalleresJson()
     {
         if (!isset($_SESSION['id'])) {
@@ -39,7 +38,6 @@ class TallerController
         echo json_encode($talleres);
     }
 
-    // Procesar solicitud de inscripción
     public function solicitar()
     {
         if (!isset($_SESSION['id'])) {
@@ -55,7 +53,6 @@ class TallerController
             return;
         }
 
-        // Verificar que el taller exista y tenga cupo
         $taller = $this->tallerModel->getById($tallerId);
         if (!$taller) {
             echo json_encode(['success' => false, 'message' => 'El taller no existe']);
@@ -67,13 +64,11 @@ class TallerController
             return;
         }
 
-        // Verificar que el usuario no tenga ya una solicitud activa para este taller
         if ($this->solicitudModel->existeSolicitudActiva($tallerId, $usuarioId)) {
             echo json_encode(['success' => false, 'message' => 'Ya tienes una solicitud activa o aprobada para este taller']);
             return;
         }
 
-        // Crear la solicitud (el cupo se descuenta solo al aprobar)
         if ($this->solicitudModel->crear($tallerId, $usuarioId)) {
             echo json_encode(['success' => true, 'message' => 'Solicitud enviada correctamente. Espera la aprobación del administrador.']);
         } else {
