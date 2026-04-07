@@ -1,7 +1,6 @@
 $(function () {
     const urlBase = "index.php";
 
-    // Cargar talleres disponibles al iniciar la página
     cargarTalleres();
 
     function cargarTalleres() {
@@ -47,7 +46,6 @@ $(function () {
         });
     }
 
-    // Evento delegado para botones de solicitar (se generan dinámicamente)
     $(document).on("click", ".btn-solicitar", function () {
         let tallerId = $(this).data("id");
         let tallerNombre = $(this).data("nombre");
@@ -71,7 +69,6 @@ $(function () {
         );
     });
 
-    // Cerrar sesión
     $("#btnLogout").on("click", function () {
         $.post(urlBase, { option: "logout" }, function () {
             window.location.href = "index.php?page=login";

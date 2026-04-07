@@ -1,7 +1,6 @@
 $(function () {
     const urlBase = "index.php";
 
-    // Cargar solicitudes pendientes al iniciar la página admin
     if ($("#solicitudes-body").length) {
         cargarSolicitudes();
     }
@@ -71,7 +70,6 @@ $(function () {
         );
     });
 
-    // Rechazar solicitud
     $(document).on("click", ".btn-rechazar", function () {
         let solicitudId = $(this).data("id");
         let fila = $("#fila-" + solicitudId);
@@ -95,7 +93,6 @@ $(function () {
         );
     });
 
-    // Cerrar sesión (en ambas vistas)
     $("#btnLogout").on("click", function () {
         $.post(urlBase, { option: "logout" }, function () {
             window.location.href = "index.php?page=login";

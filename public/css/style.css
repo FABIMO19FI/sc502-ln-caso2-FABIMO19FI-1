@@ -3,12 +3,10 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* ===== NAVBAR ===== */
 .navbar {
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-/* ===== CARD ===== */
 .card {
     border-radius: 10px;
     border: none;
@@ -19,7 +17,6 @@ body {
     padding: 1.2rem;
 }
 
-/* ===== TABLA ===== */
 .table thead th {
     vertical-align: middle;
 }
@@ -30,18 +27,15 @@ body {
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* ===== BOTONES ===== */
 .btn {
     border-radius: 6px;
 }
 
-/* ===== ALERTAS ===== */
 .alert {
     border-radius: 8px;
     font-weight: 500;
 }
 
-/* ===== BADGE CUPOS ===== */
 .badge.fs-6 {
     font-size: 0.9rem !important;
     padding: 0.4em 0.7em;
