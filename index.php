@@ -10,7 +10,6 @@ require_once './app/models/User.php';
 
 $page = $_GET['page'] ?? 'login';
 
-// ========== RUTAS GET OBTENER DATOS ==========
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     // Obtener listado de talleres disponibles
@@ -20,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         exit;
     }
 
-    // Obtener solicitudes pendientes (admin)
     if (($_GET['option'] ?? "") == "solicitudes_json") {
         $admin = new AdminController();
         $admin->getSolicitudesJson();
@@ -28,7 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 }
 
-// ========== RUTAS FORMULARIO POST ==========
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($_POST['option'] == "login") {
@@ -68,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// ========== RUTAS DE VISTAS ==========
 switch ($page) {
 
     case "talleres":
