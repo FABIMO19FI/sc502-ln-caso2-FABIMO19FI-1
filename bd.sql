@@ -1,6 +1,7 @@
+CREATE DATABASE IF NOT EXISTS appdb;
 USE appdb;
 
-CREATE TABLE usuarios (
+CREATE TABLE IF NOT EXISTS usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -9,15 +10,15 @@ CREATE TABLE usuarios (
 );
 
 -- Insertar admin (password: 12345)
-INSERT INTO usuarios (username, nombre, email, password, rol) VALUES 
-('admin',  '$2y$10$0wkl2VjqQFNw2X5e.f3Lj.fliI7Etwk8r7bNW.OkqtGi31E8M6nRC', 'admin');
+INSERT INTO usuarios (username, password, rol) VALUES 
+('admin', '$2y$10$0wkl2VjqQFNw2X5e.f3Lj.fliI7Etwk8r7bNW.OkqtGi31E8M6nRC', 'admin');
 
 -- Insertar usuario de prueba (password: 12345)
-INSERT INTO usuarios (username, nombre, email, password, rol) VALUES 
-('usuario1',  '$2y$10$0wkl2VjqQFNw2X5e.f3Lj.fliI7Etwk8r7bNW.OkqtGi31E8M6nRC', 'usuario');
+INSERT INTO usuarios (username, password, rol) VALUES 
+('usuario1', '$2y$10$0wkl2VjqQFNw2X5e.f3Lj.fliI7Etwk8r7bNW.OkqtGi31E8M6nRC', 'usuario');
 
 -- Tabla de talleres
-CREATE TABLE talleres (
+CREATE TABLE IF NOT EXISTS talleres (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
@@ -30,8 +31,7 @@ INSERT INTO talleres (nombre, descripcion, cupo_maximo, cupo_disponible) VALUES
 ('Taller de jQuery', 'DOM, eventos y AJAX', 3, 3),
 ('Taller de MySQL', 'Bases de datos relacionales', 4, 4);
 
-
-CREATE TABLE solicitudes (
+CREATE TABLE IF NOT EXISTS solicitudes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     taller_id INT NOT NULL,
     usuario_id INT NOT NULL,

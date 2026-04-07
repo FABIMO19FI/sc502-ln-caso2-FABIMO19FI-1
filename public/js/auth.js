@@ -1,33 +1,45 @@
 $(function () {
     let formLogin = $("#formLogin");
-    const urlBase = "index.php"
+    const urlBase = "index.php";
 
     formLogin.on("submit", function (event) {
         event.preventDefault();
+
         let username = $("#username");
         let password = $("#password");
 
         if (username.val() === "" || password.val() === "") {
-            alert("Debe completar todos los campos");
+            mostrarMensaje("Debe completar todos los campos", "danger");
         } else {
-            $.post(urlBase,
+            $.post(
+                urlBase,
                 {
                     username: username.val(),
                     password: password.val(),
                     option: "login"
                 },
-                function (data, status) {
+                function (data) {
                     data = JSON.parse(data);
-                    console.log(data);
-                    if(data.response == "00"){
-                        window.location = data.rol == 'admin' ? "index.php?page=admin" : "index.php?page=talleres";
+                    if (data.response == "00") {
+                        mostrarMensaje("Ingreso exitoso. Redirigiendo...", "success");
+                        setTimeout(function () {
+                            window.location = data.rol == "admin"
+                                ? "index.php?page=admin"
+                                : "index.php?page=talleres";
+                        }, 800);
                     } else {
-                        alert(data.message)
+                        mostrarMensaje(data.message, "danger");
                     }
-                });
-
+                }
+            );
         }
-    })
+    });
 
-
-})
+    function mostrarMensaje(texto, tipo) {
+        $("#mensaje")
+            .removeClass("d-none alert-success alert-danger alert-warning")
+            .addClass("alert-" + tipo)
+            .text(texto)
+            .show();
+    }
+});
