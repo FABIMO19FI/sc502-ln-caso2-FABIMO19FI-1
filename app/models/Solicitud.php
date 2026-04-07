@@ -8,7 +8,6 @@ class Solicitud
         $this->conn = $db;
     }
 
-    // Crear nueva solicitud
     public function crear($tallerId, $usuarioId)
     {
         $query = "INSERT INTO solicitudes (taller_id, usuario_id, estado) VALUES (?, ?, 'pendiente')";
@@ -18,7 +17,6 @@ class Solicitud
         return $stmt->affected_rows > 0;
     }
 
-    // Verificar si ya existe solicitud activa (pendiente o aprobada) del usuario para ese taller
     public function existeSolicitudActiva($tallerId, $usuarioId)
     {
         $query = "SELECT id FROM solicitudes WHERE taller_id = ? AND usuario_id = ? AND estado IN ('pendiente', 'aprobada')";
@@ -29,7 +27,6 @@ class Solicitud
         return $result->num_rows > 0;
     }
 
-    // Obtener todas las solicitudes pendientes con datos de taller y usuario
     public function getPendientes()
     {
         $query = "SELECT s.id, s.fecha_solicitud, s.estado,
@@ -48,7 +45,6 @@ class Solicitud
         return $solicitudes;
     }
 
-    // Obtener solicitud por ID
     public function getById($id)
     {
         $query = "SELECT * FROM solicitudes WHERE id = ?";
@@ -59,7 +55,6 @@ class Solicitud
         return $result->fetch_assoc();
     }
 
-    // Aprobar solicitud
     public function aprobar($id)
     {
         $query = "UPDATE solicitudes SET estado = 'aprobada' WHERE id = ?";
@@ -69,7 +64,6 @@ class Solicitud
         return $stmt->affected_rows > 0;
     }
 
-    // Rechazar solicitud
     public function rechazar($id)
     {
         $query = "UPDATE solicitudes SET estado = 'rechazada' WHERE id = ?";
