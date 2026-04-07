@@ -1,3 +1,4 @@
+
 <?php
 
 require_once __DIR__ . '/../../config/database.php';
@@ -26,7 +27,7 @@ class AdminController
         require __DIR__ . '/../views/admin/solicitudes.php';
     }
 
-    // Retorna solicitudes pendientes en JSON
+
     public function getSolicitudesJson()
     {
         if (!isset($_SESSION['id']) || $_SESSION['rol'] !== 'admin') {
@@ -38,7 +39,6 @@ class AdminController
         echo json_encode($solicitudes);
     }
 
-    // Aprobar solicitud: verificar cupo y descontar
     public function aprobar()
     {
         if (!isset($_SESSION['id']) || $_SESSION['rol'] !== 'admin') {
@@ -53,7 +53,6 @@ class AdminController
             return;
         }
 
-        // Obtener la solicitud
         $solicitud = $this->solicitudModel->getById($solicitudId);
         if (!$solicitud) {
             echo json_encode(['success' => false, 'message' => 'Solicitud no encontrada']);
@@ -65,7 +64,6 @@ class AdminController
             return;
         }
 
-        // Verificar en tiempo real que aún haya cupo disponible
         $taller = $this->tallerModel->getById($solicitud['taller_id']);
         if (!$taller || $taller['cupo_disponible'] <= 0) {
             echo json_encode(['success' => false, 'message' => 'No hay cupo disponible en el taller']);
@@ -81,7 +79,6 @@ class AdminController
         }
     }
 
-    // Rechazar solicitud: solo cambia estado, no afecta cupo
     public function rechazar()
     {
         if (!isset($_SESSION['id']) || $_SESSION['rol'] !== 'admin') {
